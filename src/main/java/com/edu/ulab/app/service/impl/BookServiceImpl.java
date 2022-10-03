@@ -62,7 +62,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getBookById(Integer id) {
-        Book book = bookRepository.findById(Long.valueOf(id))
+        Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Can not fount book with ID: " + id));
         log.info("Find book with ID: " + id);
         return bookMapper.bookToBookDto(book);
@@ -71,7 +71,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBookById(Integer id) {
         try {
-            bookRepository.deleteById(Long.valueOf(id));
+            bookRepository.deleteById(id);
             log.info("deleted book with ID: " + id);
         } catch (EmptyResultDataAccessException exc) {
             throw new NotFoundException("BOOK with ID" + id + "not found");

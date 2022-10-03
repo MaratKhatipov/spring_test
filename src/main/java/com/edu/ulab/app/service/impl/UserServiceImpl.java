@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Integer id) {
-        Person person = userRepository.findById(Long.valueOf(id))
+        Person person = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Can not fount user with ID: " + id));
         log.info("Find person with ID: " + id);
         return userMapper.personToUserDto(person);
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Integer id) {
         try {
-            userRepository.deleteById(Long.valueOf(id));
+            userRepository.deleteById(id);
             log.info("deleted user with ID: " + id);
         } catch (EmptyResultDataAccessException exc) {
             throw new NotFoundException("User with ID" + id + "not found");

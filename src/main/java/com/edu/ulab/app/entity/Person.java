@@ -29,11 +29,14 @@ public class Person {
 
 //    @Column(nullable = false)
 //    private int count;
-
+/*
+Добавил CascadeType.REMOVE т.к. на id ссылается таблица «book».
+ */
     @OneToMany(mappedBy = "person", cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.DETACH,
+            CascadeType.REMOVE,
             CascadeType.REFRESH})
     private Set<Book> bookSet;
 }
